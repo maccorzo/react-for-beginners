@@ -33,7 +33,6 @@ class Order extends React.Component {
       }
       return prevTotal;
     }, 0);
-    console.log(orderIds);
     return (
       <div className="order-wrap">
         <h2>Your Order</h2>
