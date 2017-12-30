@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.addFish = this.addFish.bind(this);
+    this.updateFish = this.updateFish.bind(this);
     this.loadSample = this.loadSample.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.state = {
@@ -19,7 +20,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    
+
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
       context: this,
       state: 'fishes'
@@ -49,6 +50,12 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
+  updateFish(key, updatedFish) {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
+  }
+
   loadSample() {
     this.setState({
       fishes: sampleFishes
@@ -73,12 +80,16 @@ class App extends React.Component {
             }
           </ul>
         </div>
-        <Order 
-          fishes={this.state.fishes} 
+        <Order
+          fishes={this.state.fishes}
           order={this.state.order}
           params={this.props.params}
-          />
-        <Inventory addFish={this.addFish} loadSample={this.loadSample} />
+        />
+        <Inventory
+          addFish={this.addFish}
+          loadSample={this.loadSample}
+          fishes={this.state.fishes}
+          updateFish={this.updateFish} />
       </div>
     )
   }
