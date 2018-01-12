@@ -79,7 +79,7 @@ class App extends React.Component {
   removeFromOrder(key) {
     const order = { ...this.state.order };
     delete order[key];
-    this.setState({ order});
+    this.setState({ order });
   }
 
   render() {
@@ -105,6 +105,7 @@ class App extends React.Component {
           removeFish={this.removeFish}
           loadSample={this.loadSample}
           fishes={this.state.fishes}
+          storeId={this.props.params.storeId}
           updateFish={this.updateFish} />
       </div>
     )
