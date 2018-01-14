@@ -5,12 +5,6 @@ class Inventory extends React.Component {
 
   constructor() {
     super();
-    this.renderInventory = this.renderInventory.bind(this);
-    this.renderLogin = this.renderLogin.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.authHandler = this.authHandler.bind(this);
-    this.logout = this.logout.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       uid: null,
       owner: null,
@@ -24,30 +18,30 @@ class Inventory extends React.Component {
     });
   }
 
-  handleChange(e, key) {
+  handleChange = (e, key) => {
     const fish = this.props.fishes[key];
     const updatedFish = {
       ...fish,
       [e.target.name]: e.target.value
     }
     this.props.updateFish(key, updatedFish)
-  }
+  };
 
-  authenticate(provider) {
+  authenticate = (provider) => {
     console.log(`Log in with ${provider}`);
     base.authWithOAuthPopup(provider, this.authHandler)
-  }
+  };
 
-  logout() {
+  logout = ()  => {
     base.unauth();
     this.setState({ uid: null });
-  }
+  };
 
-  authHandler(err, authData) {
+  authHandler = (err, authData) => {
     if (err) {
       console.log(err);
       return;
-    }
+    };
     // grab the store info
     const storeRef = base.database().ref(this.props.storeId);
 
@@ -72,7 +66,7 @@ class Inventory extends React.Component {
 
   }
 
-  renderLogin() {
+  renderLogin = () => {
     return (
       <nav className="login">
         <h2>Inventory</h2>
@@ -82,9 +76,9 @@ class Inventory extends React.Component {
         <button className="twitter" onClick={() => this.authenticate('twitter')} >Log In with Twitter</button>
       </nav>
     )
-  }
+  };
 
-  renderInventory(key) {
+  renderInventory = (key) => {
     const fish = this.props.fishes[key];
     return (
       <div className="fish-edit" key={key}>
@@ -104,7 +98,7 @@ class Inventory extends React.Component {
         <button onClick={() => this.props.removeFish(key)}>Remove Fish</button>
       </div>
     )
-  }
+  };
 
   render() {
     const logout = <button onClick={this.logout}>Log Out!</button>
