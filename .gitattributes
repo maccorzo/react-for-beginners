@@ -1,3 +1,5 @@
 1 * text=auto
    2 *.css linguist-vendored
    3 *.styl linguist-vendored
+   3 *.svg linguist-vendored
+   3 *.ttf linguist-vendored
